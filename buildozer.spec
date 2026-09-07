@@ -37,6 +37,9 @@ android.minapi = 21
 # (str) Android NDK version to use
 android.ndk = 25b
 
+# (str) Android SDK build tools version
+android.build_tools_version = 33.0.2
+
 # (bool) Indicate if the application should be fullscreen or not
 fullscreen = 0
 
