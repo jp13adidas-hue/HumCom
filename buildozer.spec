@@ -21,28 +21,14 @@ source.exclude_exts = spec
 # (list) List of directory to exclude (let empty to exclude none)
 source.exclude_dirs = bin, venv, .git, .github
 
-# (list) List of exclusions in glob format
-source.exclude_glob = 
-
 # (str) Application versioning
 version = 0.1
 
 # (list) Application requirements
-# comma separated e.g. requirements = sqlite3,kivy
 requirements = python3,kivy
-
-# (list) Custom source folders for requirements
-#requirements.source_dirs =
 
 # (str) Supported orientations
 orientation = portrait
-
-# (list) List of services to declare
-#services = 
-
-#
-# OSX specific
-#
 
 #
 # Android specific
@@ -65,12 +51,6 @@ android.build_tools_version = 33.0.2
 
 # (list) Permissions
 android.permissions = INTERNET
-
-# (list) target to build, gnu, pgsd, sdl2, pygame, etc.
-#android.target = android
-
-# (list) 
-#android.archs = armeabi-v7a, arm64-v8a
 
 # (bool) Enable AndroidX support
 android.androidx = True
