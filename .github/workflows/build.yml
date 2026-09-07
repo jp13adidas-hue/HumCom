@@ -1,44 +1,21 @@
 name: CI
-
 on:
-  push:
-    branches: [ main ]
-
+push:
+branches: [ main ]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.x'
-
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y git openjdk-17-jdk unzip libltdl-dev
-        pip install --upgrade pip
-        pip install cython==0.29.33 buildozer
-
-    - name: Accept SDK Licenses and Prepare Environment
-      run: |
-        export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
-        mkdir -p $ANDROID_HOME
-        # Si el sdkmanager ya existe, aceptamos licencias automáticamente
-        if [ -f "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" ]; then
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
-        fi
-
-    - name: Build with Buildozer
-      run: |
-        buildozer -v android debug
-
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: package
-        path: bin/*.apk
-        
+build:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout repository
+uses: actions/checkout@v4
+- name: Build with Buildozer Action
+uses: ArtemSBulgakov/buildozer-action@v1
+id: buildozer
+with:
+command: buildozer android debug
+buildozer_version: master
+- name: Upload APK
+uses: actions/upload-artifact@v4
+with:
+name: package
+path: ${{ steps.buildozer.outputs.filename }}
